@@ -3,10 +3,23 @@
 # changelog.sh
 # manipulates git changelog to display banner art in
 
-#pull everything to sync it up
-#git pull origin master
+### DEFAULT ARGS ########
+# Number of commits to apply
+CYCLES=2
 
-
+### COMMAND LINE ARGS ##
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -c|--commits)
+      CYCLES=$(($2))
+      shift
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
 
 ### CONSTANTS #####
 
@@ -50,8 +63,6 @@ declare -a COORDS=(
 )
 # Number of commits walked back
 SIZE=${#COORDS[@]}
-# Number of commits to apply
-CYCLES=2
 
 
 ### FUNCTIONS #####
