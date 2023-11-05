@@ -99,7 +99,7 @@ function update {
 ### MAIN EXECUTION ###############
 
 #If the script has run once before, delete previous occurence
-if [ -e "launched" ]; then
+if [ -e .git ]; then
   undo $( echo "$SIZE * $CYCLES" | bc )
 fi
 
