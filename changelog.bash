@@ -3,24 +3,6 @@
 # changelog.sh
 # manipulates git changelog to display banner art in
 
-### DEFAULT ARGS ########
-# Number of commits to apply
-CYCLES=2
-
-### COMMAND LINE ARGS ##
-while [[ $# -gt 0 ]]; do
-  case $1 in
-    -c|--commits)
-      CYCLES=$(($2))
-      shift
-      shift
-      ;;
-    *)
-      shift
-      ;;
-  esac
-done
-
 ### CONSTANTS #####
 
 # Seconds in a week
@@ -64,6 +46,23 @@ declare -a COORDS=(
 # Number of commits walked back
 SIZE=${#COORDS[@]}
 
+### DEFAULT ARGS AND CLI PARSING ########
+# Number of commits to apply
+CYCLES=2
+
+### COMMAND LINE ARGS ##
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -c|--commits)
+      CYCLES=$(($2))
+      shift
+      shift
+      ;;
+    *)
+      shift
+      ;;
+  esac
+done
 
 ### FUNCTIONS #####
 
