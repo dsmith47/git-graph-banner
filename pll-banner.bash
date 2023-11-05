@@ -49,13 +49,17 @@ SIZE=${#COORDS[@]}
 ### DEFAULT ARGS AND CLI PARSING ########
 # Number of commits to apply
 CYCLES=2
-
+CLEAR_ONLY=0
 ### COMMAND LINE ARGS ##
 while [[ $# -gt 0 ]]; do
   case $1 in
     -c|--commits)
       CYCLES=$(($2))
       shift
+      shift
+      ;;
+    --clear_only)
+      CLEAR_ONLY=1
       shift
       ;;
     *)
@@ -101,6 +105,10 @@ function update {
 #If the script has run once before, delete previous occurence
 if [ -e .git ]; then
   undo $( echo "$SIZE * $CYCLES" | bc )
+fi
+# If the script was only run to clear, stop here
+if [ $CLEAR_ONLY -eq 1 ]; then
+  exit 0
 fi
 
 echo $BASE_DATE
