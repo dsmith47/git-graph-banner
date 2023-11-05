@@ -79,7 +79,6 @@ function undo {
 # INPUTS:
 #   @$1 - Date    The day that is beind updated
 #                 Used to touch README file to add commits
-
 function update {
   NUM=$1
   for i in $(seq $CYCLES); do
@@ -109,13 +108,11 @@ echo $BASE_DATE
 #Set date back in time (to upper left)
 let "BASE_DATE = $BASE_DATE - ( 52*$WEEK)"
 
-
 # Update for each element in the COORDS structure
 for a in ${COORDS[*]}; do
   update $( echo "$BASE_DATE+($a * $DAY)"|bc )
 done
 
-
 # Finish by pushing to github
 # Force is necessary to delete items
-git push origin master --force
+git push origin main --force
